@@ -13,9 +13,9 @@ Last Updated: March 28, 2017
 
 **[Upgrading](#upgrading)**
 
-**[FAQ](#faq)**
-
 **[Windows Setup](#windows-setup)**
+
+**[FAQ](#faq)**
 
 ##  Overview of Directories
 
@@ -240,11 +240,11 @@ For proper access to all pages of the website, enable the `mod_rewrite` module b
 
 The final screen includes some additional instructions and important information. We suggest you print these instructions for future reference.
 
-Once the system has been configured properly, you may login.  Connect to the webserver where the files are stored with your web browser.  Login to the system using the username that you picked (default is `admin`), and the password.  From there, select the `Administration` option, and customize the system to your needs.  Add users and groups as is needed. For information on using LibreHealthEHR, consult the User Documentation located in the `Documentation` folder, the documentation at [LibreHealth](http://librehealth.io/).
+Once the system has been configured properly, you may login.  Connect to the webserver where the files are stored with your web browser.  Login to the system using the username that you picked (default is `admin`), and the password.  From there, select the `Administration` option, and customize the system to your needs.  Add users and groups as is needed. For information on using LibreHealthEHR, consult the User Documentation located in the `Documentation` folder, or the documentation at [LibreHealth](http://librehealth.io/).
 
 Reading `librehealthehr/sites/default/config.php` is a good idea.
 
-To create custom encounter forms online documentation at [LibreHealth](http://librehealth.io/). Many forms exist in `interface/forms` and may be used as examples.
+To create custom encounter forms pleaase consult the online documentation at [LibreHealth](http://librehealth.io/). Many forms exist in `interface/forms` and may be used as examples.
 
 General-purpose fax support requires customization within LibreHealthEHR at Administration->Globals and custom/faxcover.txt; it also requires the following utilities:
 
@@ -258,7 +258,7 @@ General-purpose fax support requires customization within LibreHealthEHR at Admi
 
 phpGACL access controls are installed and configured automatically during LibreHealthEHR setup.  It can be administered within LibreHealthEHR in the admin->acl menu.  This is very powerful access control software. 
 
-Learn more about phpGACL [here](http://phpgacl.sourceforge.net/), recommend reading the phpGACL manual, the `/librehealthehr/Documentation/README.phpgacl.md` file, and the online documentation at [LibreHealth](http://librehealth.io/) . Also recommend reading the comments in `/librehealthehr/library/acl.inc`.
+Learn more about phpGACL [here](http://phpgacl.sourceforge.net/). We recommend that you read the phpGACL manual, the `/librehealthehr/Documentation/README.phpgacl.md` file, and the online documentation at [LibreHealth](http://librehealth.io/) . We also reccomend that you read the comments in `/librehealthehr/library/acl.inc`.
 
 ##  Upgrading
 
@@ -299,7 +299,7 @@ After cloning LibreEHR, the `php.ini` file is located in `xampp\php\` directory.
 
 Open this file with your text editor eg. [Subl](https://www.sublimetext.com/3).
 
-There will be 4 php files located in `xampp\php`, but the one needed is the one that's type is "Configuration Settings" that  change the following in the php.ini file:
+There will be 4 php files located in `xampp\php`. The  one you need is the one with the file type "Configuration Settings". Make the following changes in the php.ini file:
 
 ```
 max_execution_time = 600
@@ -337,11 +337,11 @@ Make sure that there are no undefined index errors, if so make sure that you cha
 
 ![Second Step](./Documentation/1_Installing/images/windows_installation/Step_2.png)
 
-Then after the second step, continue and leave the option "Have setup create the database" and press continue
+Then after the second step, continue and leave the option "Have setup create the database" and press continue.
 
 ![Third Step](./Documentation/1_Installing/images/windows_installation/Step_3.png)
 
-For the fourth step, enter a "Password" and "Initial User Password" you are free to change, the "Initial User" to your own username, but for convenience you can also leave it as admin. Then press continue
+For the fourth step, enter a "Password" and "Initial User Password". You are free to change the "Initial User" to your own username, but for convenience you can also leave it as admin. Then press continue.
 
 ![Fourth Step](./Documentation/1_Installing/images/windows_installation/Step_4.png)
 
@@ -363,7 +363,7 @@ Then after the fourth step, you can press continue through the others as long as
 
 ## FAQ
 
-**How can I install Apache, MySQL, and PHP on Windows?**
+**Q. How can I install Apache, MySQL, and PHP on Windows?**
 
 An easy way would be to install the [XAMPP Package](https://www.apachefriends.org/index.html). Make sure to copy the LibreHealthEHR files to the `htdocs` folder.
 
@@ -383,7 +383,7 @@ In Linux, this file is located in `/etc/mysql/mysql.conf.d/mysqld.cnf`. In Windo
 **Q. How do I restart the apache service?**
 
 Restart apache service by using `sudo apache2ctl restart` on a terminal for Linux.
-For Windows, restart apache service by using the XAMPP control interface, located in system tray (if running) or from `xampp-control.exe` in `C:\xampp`. You can restart apache by navigating to `C:\xampp\apache\bin` using CMD and executing `httpd -k restart`.
+For Windows, restart apache service by using the XAMPP control interface, located in system tray (if running) or from `xampp-control.exe` in `C:\xampp`. You can also restart apache by navigating to `C:\xampp\apache\bin` using CMD and executing `httpd -k restart`.
 
 **Q. I need help! How do I reach you?**
 
