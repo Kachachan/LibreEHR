@@ -3,17 +3,17 @@
 
 ### สารบัญ
 
-**[Directories เบื้องต้น](#overview-of-directories)**
+**[Directories เบื้องต้น](#Directories-เบื้องต้น)**
 
-**[การแตกไฟล์](#unpacking)**
+**[การแตกไฟล์](#การแตกไฟล์)**
 
-**[การตั้งค่า](#setup)**
+**[การตั้งค่า](#การตั้งค่า)**
 
-**[การตั้งค่า Access Controls](#setting-up-access-control)**
+**[การตั้งค่า Access Controls](#การตั้งค่า-Access-Controls)**
 
-**[การอัพเกรด](#upgrading)**
+**[การอัพเกรด](#การอัพเกรด)**
 
-**[การติดตั้งบน Windows](#windows-setup)**
+**[การติดตั้งบน Windows](#การติดตั้งบน-Windows)**
 
 **[FAQ](#faq)**
 
