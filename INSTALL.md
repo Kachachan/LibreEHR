@@ -83,7 +83,7 @@ Alternatively, you can download the source code directly from the repository loc
 git clone https://github.com/LibreHealthIO/LibreEHR librehealthehr
 ```
 
-###  Setup
+###  Setting Up
 
 To run LibreHealthEHR, MariaDB (prefered) or MySQL, and Apache or another PHP-capable webserver must be configured.
 
