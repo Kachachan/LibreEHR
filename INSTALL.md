@@ -3,11 +3,11 @@ Last Updated: December 26th, 2017
 
 ### Table of Contents
 
-**[1. Overview of Directories](#1.-overview-of-directories)**
+**[1. Overview of Directories](#overview-of-directories)**
 
-**[2A. Windows Installation](#windows-setup)**
+**[2A. Windows Installation](#windows-installation)**
 
-**[2B. Linux Installation](#linix-setup)**
+**[2B. Linux Installation](#linux-installation)**
 
 **[3. Setup](#setup)**
 
@@ -17,6 +17,7 @@ Last Updated: December 26th, 2017
 
 **[6. FAQ](#faq)**
 
+<div id='overview-of-directories'/>
 ##  1. Overview of Directories
 
 NOTE: The most recent documentations can be found on the [LibreHealth](http://librehealth.io/) website.
@@ -35,62 +36,23 @@ sql: Contains initial database images
 
 gacl: Contains embedded php-GACL (access controls)
 
+<div id='windows-installation'/>
 ## 2A. Windows Installation
 
-To run LibreEHR on Windows, [XAMPP](https://www.apachefriends.org/index.html) or [WAMP](http://www.wampserver.com/en/) is needed with a compatible version of php. 
+The following instructions are for Windows systems only. For instructions on installing LibreEHR onto Linux systems, please refer to [Section 2B](#linux-installation)
 
-**Note:** 
+To run LibreEHR on Windows, a compatible version of [XAMPP](https://www.apachefriends.org/index.html) or [WAMP](http://www.wampserver.com/en/) is needed. Compatible versions are 7.0 or 5.6 (5.6.30 is recommended). Versions 7.1x is not currently supported.
 
-1. Must have php [7.0](https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/_) or [5.6](https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/) ([5.6.30](https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/5.6.30/) recommended)
-
-2. php 7.1x is not currently supported
-
-Navigate to your `php.ini` file. You can find the `php.ini` file by looking at the following destination :
-* In case of WAMP :
-`C:\WAMP\BIN\PHP\php.ini` OR (left click )  wampmanager icon -> PHP -> php.ini
-* In case of XAMPP:
-`C:\xampp\php\php.ini.`.
-
-Open this file with your text editor (eg. [Subl](https://www.sublimetext.com/3)).
-
-There will be 4 php files located in `xampp\php` or `\WAMP\BIN\PHP`. The one you need is the one with the file type "Configuration Settings". Make the following changes in the php.ini file:
-
-```
-max_execution_time = 600
-max_input_time = 600
-max_input_vars = 3000
-memory_limit = 512M
-post_max_size = 32M
-upload_max_filesize = 32M
-session.gc_maxlifetime = 14400
-short_open_tag = On
-display_errors = Off
-upload_tmp_dir is set to a correct default value that will work on your system
-error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE
-```
-
-**Make sure that strict mode is disabled in Mysql**
-
-**[How to disable Mysql strict mode?](#how-to-disable-mysql-strict-mode-?)**
-
-Clone the LibreEHR [repository](https://github.com/LibreHealthIO/LibreEHR) into your computer using a console  (eg. [GitBash](https://git-for-windows.github.io/) or [Cmder](http://cmder.net/)).
+Clone the LibreEHR [repository](https://github.com/LibreHealthIO/LibreEHR) into your computer using a console (eg. [GitBash](https://git-for-windows.github.io/) or [Cmder](http://cmder.net/)).
 
 The cloned repository should be moved into the root folder of the webserver you are using. For WAMP, you should put the 'LibreEHR' folder into `\wamp\www\`. For XAMPP, you should put the `LibreEHR` folder into `\XAMPP\htdocs\`.
 
-
-
-Navigate to the LibreEHR Setup page by pointing a webbrowser to `localhost/libreEHR/setup.php`.
-
-**Note:**
-1. Make sure that your XAMPP or WAMP control panel has Apache and MySQL turned on
- 2. Apache needs to be on port 80, 443
- 3. mySQL needs to be on port 3306
-
 Follow the instructions in [Section 3. Setup](#setup)
 
+<div id='linux-installation'/>
 ## 2B. Linux Installation
 
-##  Unpacking
+###  Unpacking
 
 The LibreHealthEHR release archive should be named as follows:
 
@@ -105,13 +67,13 @@ Be sure to use the `-p` flag when using tar, as certain permissions must be pres
 
 LibreHealthEHR will be extracted into a directory named `librehealthehr`.
 
-Alternatively you can download the source code directly from the repository located at [librehealthehr](https://github.com/LibreHealthIO/librehealthehr) using
+Alternatively, you can download the source code directly from the repository located at [librehealthehr](https://github.com/LibreHealthIO/librehealthehr) using
 
 ```
 git clone https://github.com/LibreHealthIO/LibreEHR librehealthehr
 ```
 
-##  Setup
+###  Setup
 
 To run LibreHealthEHR, MariaDB (prefered) or MySQL, and Apache or another PHP-capable webserver must be configured.
 
@@ -128,7 +90,7 @@ If you don't already have it, download and install [Apache](www.apache.org), [Ma
   * Session variables
   * PHP libcurl support (optional for operation, mandatory for billing)
   
-4. If installing on Linux, make sure these dependencies are met:
+4. Make sure these dependencies are met:
 ```
 apache2
 mysql-server (or if using mariadb, then use 'mariadb-server' instead)
@@ -172,6 +134,8 @@ librehealthehr/interface/main/calendar/modules/PostCalendar/pntemplates/cache.
 
 **Note:** In linux, if the webserver user name is `apache`, then the command `chown -R apache:apache directory_name` will grant global write permissions to the directories, and we recommend making these changes permanent. Should the page display errors related to file or directory writing priviledges you may click the 'Check Again' button to try again (after fixing permissions).
 
+<div id='setup'/>
+## 3. Setup
 
 #### Step 1
 You need to tell setup whether it needs to create the database on its own, or if you have already created the database.  MySQL root priveleges will be required to create a database.
