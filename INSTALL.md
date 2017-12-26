@@ -47,13 +47,13 @@ Clone the LibreEHR [repository](https://github.com/LibreHealthIO/LibreEHR) into 
 
 The cloned repository should be moved into the root folder of the webserver you are using. For WAMP, you should put the 'LibreEHR' folder into `\wamp\www\`. For XAMPP, you should put the `LibreEHR` folder into `\XAMPP\htdocs\`.
 
-Point your web-browser to the LibreEHR Setup script at localhost/libreEHR/setup.php. 
+Point your web-browser to the LibreEHR Setup script. Do this by typing `localhost/libreEHR/setup.php` into the URL bar. A setup script will pop up.
 
-Leave the "Site ID:" as default and press continue.
+On the first page, Leave the "Site ID:" as default and press continue.
 
 ![First Step](./Documentation/1_Installing/images/windows_installation/Step_1.png)
 
-Make sure that there are no undefined index errors. If there are any, make sure that you changed the php.ini file and have the correct version of XAMPP or WAMP.
+On the second page, make sure that there are no undefined index errors. If there are any, make sure that you changed the php.ini file and have the correct version of XAMPP or WAMP. Press continue.
 
 ![Second Step](./Documentation/1_Installing/images/windows_installation/Step_2.png)
 
@@ -87,7 +87,7 @@ git clone https://github.com/LibreHealthIO/LibreEHR librehealthehr
 
 To run LibreHealthEHR, MariaDB (prefered) or MySQL, and Apache or another PHP-capable webserver must be configured.
 
-If you don't already have it, download and install [Apache](www.apache.org), [MariaDB](https://mariadb.org) (prefered) or [MySQL](www.mysql.com), and [PHP.](www.php.net)
+If you don't already have it, download and install [Apache](www.apache.org); [MariaDB](https://mariadb.org) (prefered) or [MySQL](www.mysql.com); and [PHP.](www.php.net).
 
 **Note:**
 
@@ -204,9 +204,9 @@ Should anything fail during Step 4, you may have to remove the existing database
 #### Step 5
 You will be given instructions on configuring the PHP.  We suggest you print these instructions for future reference.  Instructions are given to edit the `php.ini` configuration file.  If possible, the location of your `php.ini` file will be displayed in green. 
 
-If your `php.ini` file location is not displayed, then you will need to search for it.  The location of the `php.ini` file is dependent on the operating system.  In linux, `php.ini` is generally found inside the `/etc/php/7.0` directory.  In Windows, the `XAMPP` package places the `php.ini` file in the `xampp\apache\bin\` directory. 
+If your `php.ini` file location is not displayed, then you will need to search for it.  The location of the `php.ini` file is dependent on the operating system.  In linux, `php.ini` is generally found inside the `/etc/php/7.0` directory.  In Windows, the `XAMPP` package places the `php.ini` file in the `xampp\apache\bin\` directory. The `WAMPP` package places the `php.ini` file in the `WAMP\BIN\PHP\` directory.
 
-To ensure proper functioning of LibreHealthEHR you must make sure that settings in the `php.ini` file include:
+To ensure proper functioning of LibreHealthEHR you must make sure that the `php.ini` file includes the following settings:
 ```
 max_execution_time = 600
 max_input_time = 600
@@ -219,44 +219,42 @@ short_open_tag = On
 display_errors = Off
 upload_tmp_dir is set to a correct default value that will work on your system
 error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE
+file_uploads = On
 ``` 
-Make sure that settings in MYSQL /etc/mysql/my.cnf file include: 
+Make sure that the MYSQL /etc/mysql/my.cnf file include the following settings: 
 ```
 key_buffer_size set to 1024M
 innodb_buffer_pool_size set to 70% of available RAM.
 ```
-Make sure you have disabled strict mode in Mysql . 
+Make sure that you have disabled strict mode in Mysql . 
 
 ## How to disable Mysql strict mode?
 
-Make the following changes in the `my.ini/my.cnf`:
-Find it here `C:\WAMP\BIN\MYSQL\MySQL Server 5.6\my.ini` OR `C:\xampp\mysql\bin\my.ini` 
-OR (left click ) wampmanager icon -> MYSQL -> my.ini
-In Linux it's typically located in /etc/mysql
+Navigate to your my.ini/my.cnf file. You can find the file by looking at the following destinations :
 
-    1.  Look for the following line:
+In case of WAMP : C:\WAMP\BIN\MYSQL\MySQL Server 5.6\my.ini OR (left click ) wampmanager icon -> MYSQL -> my.ini
+In case of XAMPP: C:\xampp\mysql\bin\my.ini In Linux it is typically located in /etc/mysql
+Make the following changes in your my.ini/my.cnf file :
+
+1.  Look for the following line:
     sql-mode = STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
-    or sometimes it maybe sql_mode
+    (sometimes it may be called sql_mode)
 
-    2.  Change it to:
-```
-        sql_mode="" (Blank)
-```
+2.  Change it to:
+    sql-mode="" (Blank)
 
-(XAMPP)
- If you don't find this parameter in the my.ini file, you should run server, open http://localhost/phpmyadmin/, click on the "variables" tab, search for "sql mode", and then set it to:""
+3. Restart the MySQL service.
 
-In order to take full advantage of the patient documents capability you must make sure that settings in `php.ini` file include `file_uploads = On`, that `upload_max_filesize` is appropriate for your use, and that `upload_tmp_dir` is set to a correct value that will work on your system.
-
-Restart apache service. Instructions on doing that are given in the FAQ section.
+4. Restart WAMPP/XAMPP Server.
+(XAMPP) If you cannot find this parameter in the my.ini file, you should run server, open http://localhost/phpmyadmin/, click on the "variables" tab, search for "sql mode", and then set it to: ""
 
 ![Eigth Step](./Documentation/1_Installing/images/windows_installation/Step_8.png)
 
 
 #### Step 6
-You will be given instructions on configuring the Apache web server.  We suggest you print these instructions for future reference. Instructions are given to secure the`librehealthehrwebroot/sites/*/documents`, `librehealthehrwebroot/sites/*/edi` and `librehealthehrwebroot/sites/*/era` directories, which contain patient information. This can be done be either placing pertinent `.htaccess` files in these directories or by editing the apache configuration file. 
+You will be given instructions on configuring the Apache web server.  We suggest you print these instructions for future reference. Instructions are given to secure the`librehealthehrwebroot/sites/*/documents`, `librehealthehrwebroot/sites/*/edi` and `librehealthehrwebroot/sites/*/era` directories, which contains patient information. This can be done by either placing pertinent `.htaccess` files in these directories or by editing the apache configuration file. 
 
-The location of the apache configuration file is dependent on the operating system.  In linux, you can type `httpd -V` or `apache2ctle  -V` on the commandline;  the location to the configuration file will be the `HTTPD_ROOT` variable plus the `SERVER_CONFIG_FILE` variable. In Windows, the` XAMPP` package places the configuration file at `xampp\apache\conf\httpd.conf`. 
+The location of the apache configuration file is dependent on the operating system.  In linux, you can type `httpd -V` or `apache2ctle  -V` on the commandline;  the location to the configuration file will be the `HTTPD_ROOT` variable plus the `SERVER_CONFIG_FILE` variable. In Windows, the` XAMPP` package places the configuration file at `xampp\apache\conf\original\httpd.conf`. 
 
 To secure the `/documents`, `/edi` and `/era` directories you can paste following to the end of the apache configuration file (ensure you put full path to directories):
 ```
@@ -284,7 +282,7 @@ For proper access to all pages of the website, enable the `mod_rewrite` module b
 
 The final screen includes some additional instructions and important information. We suggest you print these instructions for future reference.
 
-Once the system has been configured properly, you may login.  Connect to the webserver where the files are stored with your web browser.  Login to the system using the username that you picked (default is `admin`), and the password.  From there, select the `Administration` option, and customize the system to your needs.  Add users and groups as is needed. For information on using LibreHealthEHR, consult the User Documentation located in the `Documentation` folder, or the documentation at [LibreHealth](http://librehealth.io/).
+Once the system has been configured properly, you may login.  Connect to the webserver where the files are stored with your web browser.  Login to the system using the username that you picked (default is `admin`), and the password.  From there, select the `Administration` option, and customize the system to your needs.  Add users and groups as is needed. For information on using LibreHealthEHR, consult the User Documentation in the `Documentation` folder, or the documentation on the [LibreHealth](http://librehealth.io/) website.
 
 Reading `librehealthehr/sites/default/config.php` is a good idea.
 
@@ -300,23 +298,25 @@ General-purpose fax support requires customization within LibreHealthEHR at Admi
 ![Ninth Step](./Documentation/1_Installing/images/windows_installation/Step_9.png)
 
 
-##   Setting Up Access Control
+## 4. Setting Up Access Control
+<div id='setting-up-access-control'/>
 
 phpGACL access controls are installed and configured automatically during LibreHealthEHR setup.  It can be administered within LibreHealthEHR in the admin->acl menu.  This is very powerful access control software. 
 
-Learn more about phpGACL [here](http://phpgacl.sourceforge.net/). We recommend that you read the phpGACL manual, the `/librehealthehr/Documentation/README.phpgacl.md` file, and the online documentation at [LibreHealth](http://librehealth.io/) . We also reccomend that you read the comments in `/librehealthehr/library/acl.inc`.
+Learn more about phpGACL [here](http://phpgacl.sourceforge.net/). We recommend that you read the phpGACL manual, the `/librehealthehr/Documentation/README.phpgacl.md` file, and the online documentation on the [LibreHealth](http://librehealth.io/) website. We also recommend that you read the comments in `/librehealthehr/library/acl.inc`.
 
-##  Upgrading
+##  5. Upgrading
+<div id='upgrading'/>
 
 Be sure to back up your LibreHealthEHR installation and database before upgrading!
 
-Upgrading LibreHealthEHR is currently done by replacing the old `librehealthehr` directory with a newer version. And, ensure you copy your settings from the following old `librehealthehr` files to the new configuration files (we do not recommend simply copying the entire files):
+Upgrading LibreHealthEHR is currently done by replacing the old `librehealthehr` directory with a newer version. Ensure that you copy your settings from the  old `librehealthehr` files to the new configuration files (we do not recommend simply copying the entire files):
 
 ```
 librehealthehr/sites/default/sqlconf.php
 ```
 
-In this `sqlconf.php` file, set  `$config = 1;` (found near bottom of file within bunch of slashes)
+In this `sqlconf.php` file, set  `$config = 1;` (found near the bottom of the file within a bunch of slashes)
 
 The following directories should be copied from the old version to the new version:
 ```
@@ -328,8 +328,8 @@ librehealthehr/sites/default/letter_templates
 
 If there are other files that you have customized, then you will also need to treat those carefully.
 
-
-## FAQ
+## 6. FAQ
+<div id='faq'/>
 
 **Q. How can I install Apache, MySQL, and PHP on Windows?**
 
