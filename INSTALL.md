@@ -17,7 +17,7 @@ Last Updated: December 26th, 2017
 
 **[6. FAQ](#faq)**
 
-## Overview of Directories
+## 1. Overview of Directories
 <div id='overview-of-directories'/>
 
 NOTE: The most recent documentations can be found on the [LibreHealth](http://librehealth.io/) website.
