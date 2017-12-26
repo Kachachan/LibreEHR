@@ -1,33 +1,94 @@
 # Installation Instructions
-Last Updated: March 28, 2017
+Last Updated: December 26th, 2017
 
 ### Table of Contents
 
-**[Overview of Directories](#overview-of-directories)**
+**[1. Overview of Directories](#1.-overview-of-directories)**
 
-**[Unpacking](#unpacking)**
+**[2A. Windows Installation](#windows-setup)**
 
-**[Setup](#setup)**
+**[2B. Linux Installation](#linix-setup)**
 
-**[Setting up Access Control](#setting-up-access-control)**
+**[3. Setup](#setup)**
 
-**[Upgrading](#upgrading)**
+**[4. Setting up Access Control](#setting-up-access-control)**
 
-**[Windows Setup](#windows-setup)**
+**[5. Upgrading](#upgrading)**
 
-**[FAQ](#faq)**
+**[6. FAQ](#faq)**
 
-##  Overview of Directories
+##  1. Overview of Directories
 
-NOTE: Most recent documentation can be found on the online documentation at [LibreHealth](http://librehealth.io/).
+NOTE: The most recent documentations can be found on the [LibreHealth](http://librehealth.io/) website.
 
 contrib: Contains many user-contributed encounter forms and utilities
+
 custom: Contains scripts and other text files commonly customized
+
 Documentation: Contains useful documentation
+
 interface: Contains User Interface scripts and configuration
+
 library: Contains scripts commonly included in other scripts
+
 sql: Contains initial database images
+
 gacl: Contains embedded php-GACL (access controls)
+
+## 2A. Windows Installation
+
+To run LibreEHR on Windows, [XAMPP](https://www.apachefriends.org/index.html) or [WAMP](http://www.wampserver.com/en/) is needed with a compatible version of php. 
+
+**Note:** 
+
+1. Must have php [7.0](https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/_) or [5.6](https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/) ([5.6.30](https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/5.6.30/) recommended)
+
+2. php 7.1x is not currently supported
+
+Navigate to your `php.ini` file. You can find the `php.ini` file by looking at the following destination :
+* In case of WAMP :
+`C:\WAMP\BIN\PHP\php.ini` OR (left click )  wampmanager icon -> PHP -> php.ini
+* In case of XAMPP:
+`C:\xampp\php\php.ini.`.
+
+Open this file with your text editor (eg. [Subl](https://www.sublimetext.com/3)).
+
+There will be 4 php files located in `xampp\php` or `\WAMP\BIN\PHP`. The one you need is the one with the file type "Configuration Settings". Make the following changes in the php.ini file:
+
+```
+max_execution_time = 600
+max_input_time = 600
+max_input_vars = 3000
+memory_limit = 512M
+post_max_size = 32M
+upload_max_filesize = 32M
+session.gc_maxlifetime = 14400
+short_open_tag = On
+display_errors = Off
+upload_tmp_dir is set to a correct default value that will work on your system
+error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE
+```
+
+**Make sure that strict mode is disabled in Mysql**
+
+**[How to disable Mysql strict mode?](#how-to-disable-mysql-strict-mode-?)**
+
+Clone the LibreEHR [repository](https://github.com/LibreHealthIO/LibreEHR) into your computer using a console  (eg. [GitBash](https://git-for-windows.github.io/) or [Cmder](http://cmder.net/)).
+
+The cloned repository should be moved into the root folder of the webserver you are using. For WAMP, you should put the 'LibreEHR' folder into `\wamp\www\`. For XAMPP, you should put the `LibreEHR` folder into `\XAMPP\htdocs\`.
+
+
+
+Navigate to the LibreEHR Setup page by pointing a webbrowser to `localhost/libreEHR/setup.php`.
+
+**Note:**
+1. Make sure that your XAMPP or WAMP control panel has Apache and MySQL turned on
+ 2. Apache needs to be on port 80, 443
+ 3. mySQL needs to be on port 3306
+
+Follow the instructions in [Section 3. Setup](#setup)
+
+## 2B. Linux Installation
 
 ##  Unpacking
 
@@ -146,6 +207,39 @@ The `Initial User's Last Name` is the value to be used as their last name.  This
 
 The `Initial Group` is the first group, basically name of the practice, that will be created.  A user may belong to multiple groups, which again, can be altered on the user administration page. It is suggested that no more than one group per office be used.
 
+Need to put in:
+#### Step 2
+Leave default as the "Site ID:" and press continue.
+
+![First Step](./Documentation/1_Installing/images/windows_installation/Step_1.png)
+
+Make sure that there are no undefined index errors, if so make sure that you changed the php.ini file, or have the correct version of XAMPP.
+
+![Second Step](./Documentation/1_Installing/images/windows_installation/Step_2.png)
+
+Then after the second step, continue and leave the option "Have setup create the database" and press continue.
+
+![Third Step](./Documentation/1_Installing/images/windows_installation/Step_3.png)
+
+For the fourth step, enter a "Password" and "Initial User Password". You are free to change the "Initial User" to your own username, but for convenience you can also leave it as admin. Then press continue.
+
+![Fourth Step](./Documentation/1_Installing/images/windows_installation/Step_4.png)
+
+Then after the fourth step, you can press continue through the others as long as the steps above were followed with clarity, the rest should have no errors, and each remaining page can be continued without change.
+
+![Fifth Step](./Documentation/1_Installing/images/windows_installation/Step_5.png)
+
+![Sixth Step](./Documentation/1_Installing/images/windows_installation/Step_6.png)
+
+![Seventh Step](./Documentation/1_Installing/images/windows_installation/Step_7.png)
+
+![Eigth Step](./Documentation/1_Installing/images/windows_installation/Step_8.png)
+
+![Ninth Step](./Documentation/1_Installing/images/windows_installation/Step_9.png)
+
+![Tenth Step](./Documentation/1_Installing/images/windows_installation/Step_10.png)
+
+**Yay, you have successfull setup LibreEHR!**
 
 #### Step 3
 This is where setup will configure LibreHealthEHR.  It will first create the database and connect to it to create the initial tables.  It will then write the mysql database configuration to the `librehealthehr/sites/default/sqlconf.php` file. 
@@ -282,84 +376,6 @@ librehealthehr/sites/default/letter_templates
 
 If there are other files that you have customized, then you will also need to treat those carefully.
 
-##  Windows Setup
-
-#### Setup
-To run LibreEHR on Windows, [XAMPP](https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/5.6.30/) is needed with a compatible version
-
-**Note:** 
-
-1. Must have php [7.0](https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/_) or [5.6](https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/) ([5.6.30](https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/5.6.30/) recommended)
-
-2. php 7.1x is not currently supported
-
-Clone the LibreEHR [repository](https://github.com/LibreHealthIO/LibreEHR) into your console eg. [GitBash](https://git-for-windows.github.io/), [Cmder](http://cmder.net/)
-
-After cloning LibreEHR, the `php.ini` file is located in `xampp\php\` directory.
-
-Open this file with your text editor eg. [Subl](https://www.sublimetext.com/3).
-
-There will be 4 php files located in `xampp\php`. The  one you need is the one with the file type "Configuration Settings". Make the following changes in the php.ini file:
-
-```
-max_execution_time = 600
-max_input_time = 600
-max_input_vars = 3000
-memory_limit = 512M
-post_max_size = 32M
-upload_max_filesize = 32M
-session.gc_maxlifetime = 14400
-short_open_tag = On
-display_errors = Off
-upload_tmp_dir is set to a correct default value that will work on your system
-error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE
-```
-
-**Make sure that strict mode is disabled in Mysql**
-
-**[How to disable Mysql strict mode?](#how-to-disable-mysql-strict-mode-?)**
-
-#### Step 1
-Navigate to LibreEHR Setup:
-localhost/libreEHR/setup.php
-
-**Note:**
-1. Make sure that your XAMPP control panel has Apache and MySQL turned on
-2. Apache needs to be on port 80, 443
-3. mySQL needs to be on port 3306
-
-#### Step 2
-Leave default as the "Site ID:" and press continue.
-
-![First Step](./Documentation/1_Installing/images/windows_installation/Step_1.png)
-
-Make sure that there are no undefined index errors, if so make sure that you changed the php.ini file, or have the correct version of XAMPP.
-
-![Second Step](./Documentation/1_Installing/images/windows_installation/Step_2.png)
-
-Then after the second step, continue and leave the option "Have setup create the database" and press continue.
-
-![Third Step](./Documentation/1_Installing/images/windows_installation/Step_3.png)
-
-For the fourth step, enter a "Password" and "Initial User Password". You are free to change the "Initial User" to your own username, but for convenience you can also leave it as admin. Then press continue.
-
-![Fourth Step](./Documentation/1_Installing/images/windows_installation/Step_4.png)
-
-Then after the fourth step, you can press continue through the others as long as the steps above were followed with clarity, the rest should have no errors, and each remaining page can be continued without change.
-
-![Fifth Step](./Documentation/1_Installing/images/windows_installation/Step_5.png)
-
-![Sixth Step](./Documentation/1_Installing/images/windows_installation/Step_6.png)
-
-![Seventh Step](./Documentation/1_Installing/images/windows_installation/Step_7.png)
-
-![Eigth Step](./Documentation/1_Installing/images/windows_installation/Step_8.png)
-
-![Ninth Step](./Documentation/1_Installing/images/windows_installation/Step_9.png)
-
-![Tenth Step](./Documentation/1_Installing/images/windows_installation/Step_10.png)
-
-**Yay, you have successfull setup LibreEHR!**
 
 ## FAQ
 
