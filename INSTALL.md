@@ -17,8 +17,8 @@ Last Updated: December 26th, 2017
 
 **[6. FAQ](#faq)**
 
+## Overview of Directories
 <div id='overview-of-directories'/>
-##  1. Overview of Directories
 
 NOTE: The most recent documentations can be found on the [LibreHealth](http://librehealth.io/) website.
 
@@ -36,8 +36,8 @@ sql: Contains initial database images
 
 gacl: Contains embedded php-GACL (access controls)
 
-<div id='windows-installation'/>
 ## 2A. Windows Installation
+<div id='windows-installation'/>
 
 The following instructions are for Windows systems only. For instructions on installing LibreEHR onto Linux systems, please refer to [Section 2B](#linux-installation)
 
@@ -47,10 +47,20 @@ Clone the LibreEHR [repository](https://github.com/LibreHealthIO/LibreEHR) into 
 
 The cloned repository should be moved into the root folder of the webserver you are using. For WAMP, you should put the 'LibreEHR' folder into `\wamp\www\`. For XAMPP, you should put the `LibreEHR` folder into `\XAMPP\htdocs\`.
 
+Point your web-browser to the LibreEHR Setup script at localhost/libreEHR/setup.php. 
+
+Leave the "Site ID:" as default and press continue.
+
+![First Step](./Documentation/1_Installing/images/windows_installation/Step_1.png)
+
+Make sure that there are no undefined index errors. If there are any, make sure that you changed the php.ini file and have the correct version of XAMPP or WAMP.
+
+![Second Step](./Documentation/1_Installing/images/windows_installation/Step_2.png)
+
 Follow the instructions in [Section 3. Setup](#setup)
 
-<div id='linux-installation'/>
 ## 2B. Linux Installation
+<div id='linux-installation'/>
 
 ###  Unpacking
 
@@ -122,7 +132,7 @@ The setup script will step you through the configuration of the LibreHealthEHR.
 The first screen of the setup script will ensure that the webserver user (in linux, often is `apache`, `www-data`, or `nobody`) has write privileges on certain files and directories. 
 The files include `librehealthehr/sites/default/sqlconf.php` and `librehealthehr/interface/modules/zend_modules/config/application.config.php`.
 
-In linux, these can be set by `chmod a+w filename` command to grant global write permissions to the file. The directories include: 
+These can be set by `chmod a+w filename` command to grant global write permissions to the file. The directories include: 
 ```
 librehealthehr/gacl/admin/templates_c
 librehealthehr/sites/default/edi
@@ -132,13 +142,17 @@ librehealthehr/interface/main/calendar/modules/PostCalendar/pntemplates/compiled
 librehealthehr/interface/main/calendar/modules/PostCalendar/pntemplates/cache. 
 ```
 
-**Note:** In linux, if the webserver user name is `apache`, then the command `chown -R apache:apache directory_name` will grant global write permissions to the directories, and we recommend making these changes permanent. Should the page display errors related to file or directory writing priviledges you may click the 'Check Again' button to try again (after fixing permissions).
+**Note:** If the webserver user name is `apache`, then the command `chown -R apache:apache directory_name` will grant global write permissions to the directories. We recommend making these changes permanent. Should the page display errors related to file or directory writing priviledges you may click the 'Check Again' button to try again (after fixing permissions).
 
-<div id='setup'/>
 ## 3. Setup
+<div id='setup'/>
+
+The setup.php script will run you through setting up LibreEHR.
 
 #### Step 1
 You need to tell setup whether it needs to create the database on its own, or if you have already created the database.  MySQL root priveleges will be required to create a database.
+
+![Third Step](./Documentation/1_Installing/images/windows_installation/Step_3.png)
 
 #### Step 2
 You will be presented with a number of fields which specify the MySQL server details and the `librehealthehr` directory paths.
@@ -171,51 +185,21 @@ The `Initial User's Last Name` is the value to be used as their last name.  This
 
 The `Initial Group` is the first group, basically name of the practice, that will be created.  A user may belong to multiple groups, which again, can be altered on the user administration page. It is suggested that no more than one group per office be used.
 
-Need to put in:
-#### Step 2
-Leave default as the "Site ID:" and press continue.
-
-![First Step](./Documentation/1_Installing/images/windows_installation/Step_1.png)
-
-Make sure that there are no undefined index errors, if so make sure that you changed the php.ini file, or have the correct version of XAMPP.
-
-![Second Step](./Documentation/1_Installing/images/windows_installation/Step_2.png)
-
-Then after the second step, continue and leave the option "Have setup create the database" and press continue.
-
-![Third Step](./Documentation/1_Installing/images/windows_installation/Step_3.png)
-
-For the fourth step, enter a "Password" and "Initial User Password". You are free to change the "Initial User" to your own username, but for convenience you can also leave it as admin. Then press continue.
-
 ![Fourth Step](./Documentation/1_Installing/images/windows_installation/Step_4.png)
-
-Then after the fourth step, you can press continue through the others as long as the steps above were followed with clarity, the rest should have no errors, and each remaining page can be continued without change.
-
-![Fifth Step](./Documentation/1_Installing/images/windows_installation/Step_5.png)
-
-![Sixth Step](./Documentation/1_Installing/images/windows_installation/Step_6.png)
-
-![Seventh Step](./Documentation/1_Installing/images/windows_installation/Step_7.png)
-
-![Eigth Step](./Documentation/1_Installing/images/windows_installation/Step_8.png)
-
-![Ninth Step](./Documentation/1_Installing/images/windows_installation/Step_9.png)
-
-![Tenth Step](./Documentation/1_Installing/images/windows_installation/Step_10.png)
-
-**Yay, you have successfull setup LibreEHR!**
 
 #### Step 3
 This is where setup will configure LibreHealthEHR.  It will first create the database and connect to it to create the initial tables.  It will then write the mysql database configuration to the `librehealthehr/sites/default/sqlconf.php` file. 
 
 Should anything fail during Step 3, you may have to remove the existing database or tables before you can try again. If no errors occur, you will see a `Continue` button at the bottom.
 
+![Sixth Step](./Documentation/1_Installing/images/windows_installation/Step_6.png)
 
 #### Step 4
 This step will install and configure the embedded phpGACL access controls.  It will first write configuration settings to files.  It will then configure the database.  It will then give the `Initial User` administrator access. 
 
 Should anything fail during Step 4, you may have to remove the existing database or tables before you can try again. If no errors occur, you will see a `Continue` button at the bottom.
 
+![Seventh Step](./Documentation/1_Installing/images/windows_installation/Step_7.png)
 
 #### Step 5
 You will be given instructions on configuring the PHP.  We suggest you print these instructions for future reference.  Instructions are given to edit the `php.ini` configuration file.  If possible, the location of your `php.ini` file will be displayed in green. 
@@ -266,6 +250,8 @@ In order to take full advantage of the patient documents capability you must mak
 
 Restart apache service. Instructions on doing that are given in the FAQ section.
 
+![Eigth Step](./Documentation/1_Installing/images/windows_installation/Step_8.png)
+
 
 #### Step 6
 You will be given instructions on configuring the Apache web server.  We suggest you print these instructions for future reference. Instructions are given to secure the`librehealthehrwebroot/sites/*/documents`, `librehealthehrwebroot/sites/*/edi` and `librehealthehrwebroot/sites/*/era` directories, which contain patient information. This can be done be either placing pertinent `.htaccess` files in these directories or by editing the apache configuration file. 
@@ -310,6 +296,8 @@ General-purpose fax support requires customization within LibreHealthEHR at Admi
 * mogrify from the ImageMagick package
 * tiff2pdf, tiffcp and tiffsplit from the libtiff-tools package
 * enscript
+
+![Ninth Step](./Documentation/1_Installing/images/windows_installation/Step_9.png)
 
 
 ##   Setting Up Access Control
